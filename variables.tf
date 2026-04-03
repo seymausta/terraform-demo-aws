@@ -3,7 +3,7 @@ variable "instance_type" {
 }
 
 variable "instance_name" {
-    type=string
-    description = "Value of the EC2 instance's Name tag."
-    default="terraform-demo-v1"
+  type        = string
+  description = "Value of the EC2 instance's Name tag."
+  default     = "terraform-demo-v1"
 }

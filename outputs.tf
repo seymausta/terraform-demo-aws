@@ -1,8 +1,8 @@
 output "instance_hostname" {
   description = "Private DNS name of the EC2 instance."
-  value       = aws_instance.ec2demo.private_dns
+  value       = module.ec2.instance_id
 }
 
 output "public_ip" {
-  value = aws_instance.ec2demo.public_ip
+  value = module.ec2.public_ip
 }
