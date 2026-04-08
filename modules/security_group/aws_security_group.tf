@@ -12,8 +12,8 @@ resource "aws_security_group" "this" {
   }
   ingress {
     description = "HTTP"
-    from_port   = 80 #web server için
-    to_port     = 80
+    from_port   = 8080 #web server için
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -26,3 +26,5 @@ resource "aws_security_group" "this" {
 
   }
 }
+
+

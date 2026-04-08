@@ -13,11 +13,18 @@ resource "aws_vpc" "this" {
 #VPC içinde bir IP aralığı, EC2'leri burya yerleştiriyoruz
 resource "aws_subnet" "this" {
 
+  count = length(var.subnet_cidr)
+
   vpc_id                  = aws_vpc.this.id
-  cidr_block              = var.subnet_cidr
-  map_public_ip_on_launch = true #EC2 açıldığında otomatik public IP alsın
+  cidr_block              = var.subnet_cidr[count.index]
+  availability_zone       = var.availability_zone[count.index]
+  map_public_ip_on_launch = true      #subnet public subne gibi davransın, subnet içindeki ec2'lar otomatik ip alsın
+
   tags = {
-    Name = var.subnet_name
+    Name = "${var.subnet_name}-${count.index}"
+
+    "kubernetes.io/cluster/demo_v1" = "shared"
+    "kubernetes.io/role/elb"               = "1"    #subnetleri public yapt. için elb doğru olur
   }
 }
 
@@ -44,8 +51,10 @@ resource "aws_route_table" "this" {
   }
 }
 
-#route table hangi sunete uygulanacak
+#route table hangi sunete uygulanacak, oluşturulun tüm subnetler bu route table kullansın
 resource "aws_route_table_association" "this" {
-  subnet_id      = aws_subnet.this.id
+  count = length(aws_subnet.this)
+
+  subnet_id      = aws_subnet.this[count.index].id
   route_table_id = aws_route_table.this.id
 }

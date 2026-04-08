@@ -7,6 +7,8 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = var.security_group_ids #hangi firewall kuralları geçerli
 
 
+
+
   tags = {
     Name = var.instance_name
   }

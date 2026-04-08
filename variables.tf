@@ -7,3 +7,4 @@ variable "instance_name" {
   description = "Value of the EC2 instance's Name tag."
   default     = "terraform-demo-v1"
 }
+
