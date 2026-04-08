@@ -18,13 +18,13 @@ resource "aws_subnet" "this" {
   vpc_id                  = aws_vpc.this.id
   cidr_block              = var.subnet_cidr[count.index]
   availability_zone       = var.availability_zone[count.index]
-  map_public_ip_on_launch = true      #subnet public subne gibi davransın, subnet içindeki ec2'lar otomatik ip alsın
+  map_public_ip_on_launch = true #subnet public subne gibi davransın, subnet içindeki ec2'lar otomatik ip alsın
 
   tags = {
     Name = "${var.subnet_name}-${count.index}"
 
     "kubernetes.io/cluster/demo_v1" = "shared"
-    "kubernetes.io/role/elb"               = "1"    #subnetleri public yapt. için elb doğru olur
+    "kubernetes.io/role/elb"        = "1" #subnetleri public yapt. için elb doğru olur
   }
 }
 
