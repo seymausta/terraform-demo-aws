@@ -5,15 +5,15 @@ module "eks" {
   name = var.eks_cluster_name
 
   kubernetes_version      = "1.34"
-  endpoint_private_access = false      #sadece vpc içinden erişim zorunlu değil
-  endpoint_public_access  = true      #internetten erişilsin
+  endpoint_private_access = false #sadece vpc içinden erişim zorunlu değil
+  endpoint_public_access  = true  #internetten erişilsin
 
   vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
 
 
 
-  enable_irsa = true   #best practice böyle
+  enable_irsa = true #best practice böyle
 
   eks_managed_node_groups = {
     default = {

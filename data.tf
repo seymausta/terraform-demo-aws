@@ -8,3 +8,11 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
+
+data "aws_eks_cluster" "game" {
+  name = module.eks.cluster_name
+}
+
+data "aws_eks_cluster_auth" "game" {
+  name = module.eks.cluster_name
+}

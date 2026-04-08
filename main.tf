@@ -37,3 +37,19 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
 }
+
+module "deployment" {
+
+  depends_on = [module.eks]
+  source     = "./modules/deployment"
+
+  app_name        = "game-2048"
+  namespace       = "web-app"
+  container_image = "385105851947.dkr.ecr.us-east-1.amazonaws.com/game-2048:latest"
+  replicas        = 2
+  container_port  = 80
+  service_type    = "ClusterIP"
+  labels = {
+    app = "game-2048"
+  }
+}
